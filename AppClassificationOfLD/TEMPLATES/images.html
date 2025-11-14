@@ -1,0 +1,40 @@
+<script type="text/javascript">
+var picPaths = ['/media/bg2.jpg','iphone2.png','iphone3.png'];
+var curPic = -1;
+//preload the images for smooth animation
+var imgO = new Array();
+for(i=0; i < picPaths.length; i++) {
+imgO[i] = new Image();
+imgO[i].src = picPaths[i];
+}
+
+function swapImage() {
+curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+imgCont.src = imgO[curPic].src;
+setTimeout(swapImage,2000);
+}
+
+window.onload=function() {
+imgCont = document.getElementById('imgBanner');
+swapImage();
+}
+
+</script>
+
+body
+
+
+<img id="imgBanner" src="" alt="" width="350" height="456" />
+
+
+
+
+CSS
+
+#imgBanner {
+position:absolute;
+right: 80px;
+top:836px;
+z-index:9999;
+padding: 0;
+}

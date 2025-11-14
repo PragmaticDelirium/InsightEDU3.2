@@ -1,0 +1,127 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+<style>
+	#hideDiv{background:red; width:400px; margin:0 auto; color:#fff; padding:10px; text-align:center;}
+</style>
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:750px;width:100%;">
+    	<br>
+    	<div class="container" style="width:50%;background-color:;height:500px;">
+
+    			<h1 style="color:black">Observe the images and write one word</h1>
+    			<div id = hideDiv>
+    			<img id="imgBanner" src="" alt="" width="100%" height="456" />
+    		</div>
+    			<br>
+    			<br>
+    			<div class="row">
+    				<div id = "lead_form"  class="container">
+    					 <form action="/MemoryTest1/" method="POST" >
+                {%csrf_token%}
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 1" name="sent1">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 2" name="sent2">
+                        </div>
+                        
+                        
+                    </div>
+                    <br>
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 3" aria-label="default input example" name="sent3">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 4" name="sent4">
+                        </div>
+
+                        
+                       
+                         
+                    </div>
+                    <br>
+                     <div class="row align-items-start">
+                       
+                       <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 5" name="sent5">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 6" name="sent6">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-start">
+                         <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 7" name="sent7">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 8" name="sent8">
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <div class="row">
+                <center><input type="submit" class="btn btn-dark"></center>
+            </div>
+            </div>
+        </form>
+
+
+    		
+    	</div>
+
+    
+<script type="text/javascript">
+var picPaths = ['/media/cat.jpg','/media/dog.jpg','/media/table.png','/media/car.jpg','/media/tree.jpg',
+'/media/chair.png','/media/cake.jpg','/media/umbrella.jpg'];
+var curPic = -1
+//preload the images for smooth animation
+var imgO = new Array();
+for(i=0; i < picPaths.length; i++) {
+imgO[i] = new Image();
+imgO[i].src = picPaths[i];
+
+}
+
+function swapImage() {
+	curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+	imgCont.src = imgO[curPic].src;
+	setTimeout(swapImage,10000);
+}
+window.onload=function() {
+	imgCont = document.getElementById('imgBanner');
+	swapImage(); 
+}
+$(function() {
+setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 80000)
+
+})
+$(document).ready(function() {
+
+    // Hide the div
+    $("#lead_form").hide();
+
+    // Show the div in 5s
+    $("#lead_form").delay(79999).fadeIn(500);
+
+});
+</script>
+<div class="row">
+ 
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/ReadingTest/" class="btn btn-light" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+
+</div>
+{% endblock %}

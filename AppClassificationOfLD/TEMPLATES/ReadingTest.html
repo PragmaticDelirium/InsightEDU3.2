@@ -1,0 +1,82 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:-repeat;background-size:cover;  height:750px; width: 100%;">
+        <br><br>
+        <br><br>
+        <br><br>
+    <div class="container" style="background:transparent;width:50%">
+        <div class="row">
+           <div class="col" style="background-color:black">
+            <h3 style="color:white;text-align:center;">This is a car</h3>
+        </div>
+    </div>
+        <br>
+      
+        <div class="col-md-12">
+            <div class="row">
+                <center>
+        <div class="col-md-6">
+            <form class="form-signin" action="/ReadingTest/" method="POST">
+                {% csrf_token %}
+                <input type="text" name="start" value="start" hidden>
+                <input type="submit" class="btn btn-dark" value="Start Recording">
+            </form>
+           
+           
+   
+        </div>
+    </center>
+    </div>
+       <!-- <div class="col-md-6">
+            <form class="form-signin" action="/ReadingTest/" method="POST">
+                {% csrf_token %}
+                <input type="text" name="start" value="stop" hidden>
+                <input type="submit" class="btn btn-dark" value="Stop Recording">
+            </form>
+        </div> 
+        </div> -->     
+
+   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+<div class="row">
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/GrammarTest/" class="btn btn-light" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+
+
+</div>
+<script type="text/javascript">
+
+
+
+
+
+</script>
+
+
+
+{% endblock %}

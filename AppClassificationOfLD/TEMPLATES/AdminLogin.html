@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:550px; width: 100%;">
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+	<div class="col-md-12">
+		<div class="container" style="width:50%">
+			<div class="card" style = "background-color:transparent;">
+				<div class="card-body">
+					<h5 class="card-title" style="text-align:center;color:white;">Admin Login</h5>
+					<br>
+					<form class="form-signin" action="/AdminLogin/" method="POST">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-md-6 offset-md-3">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="floatingInput" placeholder="Enter first name" name="A_name">
+									<label for="floatingInput" style="color:blue;">Username:</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row"> 
+							<div class="col-md-6 offset-md-3">
+								<div class="form-floating">
+									<input type="password" class="form-control" id="floatingPassword" placeholder="Enter last name" name="A_pwds">
+									<label for="floatingPassword" style="color:blue;">Password</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-6 offset-md-3">
+								<center><input type="submit" class="btn btn-light" value="Log In"></center>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+

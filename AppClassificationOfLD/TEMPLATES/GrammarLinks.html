@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:650px; width: 100%;">
+        
+     <div class="col-md-12">
+        <br>
+        <div class="container" style="width: 50%;background-color:white;">
+   <h2 style="color:black;text-align:center;">Video links for Grammar test</h2>
+   <br>
+   </div>
+   <br>
+     <div class="col-md-12" >
+        <div class="row">
+
+   <center><a href="https://www.youtube.com/watch?v=i9Tcm2JC4Qo"class = "btn btn-primary">1 . link for Antynoms</a></center>
+</div><br>
+<div class="row">
+  <center> <a href="https://www.youtube.com/watch?v=BI1Syz9I2n0"class = "btn btn-danger">2 . link for Singular and Pural</a></center></div><br>
+   <div class="row">
+   <center><a href="
+https://www.youtube.com/watch?v=WhSbg1rExf8"class = "btn btn-success">3 . link for Vowels</a>
+</center>
+</div><br>
+<div class="row">
+   <center><a href="
+https://www.youtube.com/watch?v=UDPHSDH_5Dc"class = "btn btn-secondary">3 . link for Alphabetical order</a>
+</center>
+</div><br>
+
+
+</div>
+
+
+
+
+
+
+
+    </div>
+
+<div class="row">
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/GrammarTest/" class="" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

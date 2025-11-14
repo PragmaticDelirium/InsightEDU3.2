@@ -1,0 +1,81 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:850px; width: 100%;">
+    <div class="col-md-12">
+        <br>
+        <div class="container" style="width: 50%;background-color:white;">
+   <h2 style="color:black;text-align:center;">Test Based on video 2</h2><br>
+  <div class="col-md-12">
+    <div class="row">
+      <form  action='/videotest2/'  method="POST"  enctype="multipart/form-data">
+        {% csrf_token %}
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="var1">
+            <label for="floatingInput">1. Between  whom the conversation is going on?</label>
+        </div>
+      </div>
+      <br>
+     <div class="col-md-12">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="var2">
+            <label for="floatingInput">2. When John asked how was the customer demo,what's the tone of reply from the Eric?(positive/negative)</label>
+        </div>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="var3">
+            <label for="floatingInput">3. When they want to close the deal?
+            ?</label>
+        </div>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="var4">
+            <label for="floatingInput">4. Which team is being consulted before feature addition?</label>
+        </div>
+      </div>
+      <br>
+        <div class="col-md-12">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="var5">
+            <label for="floatingInput">5. In which environment is the conversation taking place?</label>
+        </div>
+      </div>
+      </div>
+
+    </div>
+
+  <br>
+
+  <div id="formFooter">
+    <center><button type="submit"  class = "btn btn-danger">Submit</button></center>
+  </div>
+  <br>
+ 
+ </form>
+ <br>
+</div>
+
+
+
+
+
+
+           
+           
+
+
+
+        </div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:650px; width: 100%;">
+        <br>
+    <div class="row">
+        <br>
+        <div class="container" style="background:transparent;width:50%;">
+            <form class="form-signin" action="/GrammarTest/" method="POST">
+                {% csrf_token %}
+               <br>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Antonym of Tall&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" id="basic-url" name="quest1" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Give pural form of Woman&nbsp;:</span>
+                        <input type="text" class="form-control" id="basic-url" name="quest2" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Name all the vowels&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" id="basic-url" name="quest3" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Sort in alphabetical order<br>[apple,kiwi,grapes,mango,banana]</span>
+                        <input type="text" class="form-control" id="basic-url" name="quest4" aria-describedby="basic-addon3">
+                    </div>
+                    <center>
+                        
+                    <input type="submit" class="btn btn-secondary" value="Submit Test">
+                    </center>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<br>
+<br>
+<div class="row">
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/MathsTest/" class="btn btn-light" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+
+
+</div>
+
+{% endblock %}

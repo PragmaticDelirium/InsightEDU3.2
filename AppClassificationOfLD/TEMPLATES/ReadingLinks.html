@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:650px; width: 100%;">
+        
+     <div class="col-md-12">
+        <br>
+        <div class="container" style="width: 50%;background-color:white;">
+   <h2 style="color:black;text-align:center;">Video links for Reading test</h2>
+   <br>
+   </div>
+   <br>
+     <div class="col-md-12" >
+        <div class="row">
+
+   <center><a href="https://www.youtube.com/watch?v=urfD8RbebK4" class="btn btn-primary">1 . Name Words and Describing Words</a></center>
+</div><br>
+<div class="row">
+  <center> <a href="https://www.youtube.com/watch?v=fdqtH_oywGQ"class = "btn btn-danger">2 . Approach in Reading Tagalog</a></center></div><br>
+   <div class="row">
+   <center><a href="
+
+https://www.youtube.com/watch?v=fE6Y7n-YUuU"class = "btn btn-success">3 . Reading basic sentences</a>
+</center>
+</div><br>
+
+
+</div>
+
+
+<div class="row">
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/ReadingTest/" class="btn btn-light" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+-->
+
+
+
+    </div>
+
+{% endblock %}

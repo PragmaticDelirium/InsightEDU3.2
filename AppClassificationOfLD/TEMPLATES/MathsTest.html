@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+{% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+{% endfor %}
+
+ {% endif %}
+<div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size: cover;color: white;height:750px;  ">
+    <br>
+    <div class="row">
+        <br>
+        <div class="container" style="background:transparent;width:50%;">
+            <form class="form-signin" action="/MathsTest/" method="POST">
+                {% csrf_token %}
+               <br>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">2+2=?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="number" class="form-control" id="basic-url" name ="quest1"aria-describedby="basic-addon3" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">5X2=?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="number" class="form-control" id="basic-url"name ="quest2" aria-describedby="basic-addon3" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">5 factorial=?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="number" class="form-control" id="basic-url" name ="quest3" aria-describedby="basic-addon3" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">4 divided by 2=?</span>
+                        <input type="number" class="form-control" id="basic-url" name ="quest4" aria-describedby="basic-addon3" required>
+                    </div>
+                    <center>
+                    <input type="submit" class="btn btn-secondary" value="Submit Test">
+                    </center>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

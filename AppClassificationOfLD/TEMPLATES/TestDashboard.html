@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+{% block content%}
+{% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:750px; width: 100%;">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+                
+                <div class="col-md-12">
+                        <div class="row">
+                                <div class="col">
+                                        <h3 style="text-align:center;color: white;">Maths Test</h3>
+                                        <a href="/MathsTest/">
+                                         <img class="card-img-top"src="/media/maths3.png" name="images" alt="Card image" style="height: 300px;width:100%;padding-left:15px;border-radius:50% ; "></a>
+                                </div>
+                                <div class="col">
+                                        <h3 style="text-align:center;color: white;">Grammar Test</h3>
+                                        <a href="/GrammarTest/">
+                                        <img class="card-img-top"src="/media/gram1.jpg" name="images" alt="Card image" style="height: 300px;width:100%;border-radius:50% ;"></a>
+                                </div>
+
+                                <div class="col">
+                                        <h3 style="text-align:center;color: white;">Reading Test</h3>
+                                        <a href="/ReadingTest/">
+                                        <img class="card-img-top"src="/media/read.jpg" name="images" alt="Card image" style="height: 300px;width:100%;border-radius:50% ; "></a>
+                                </div>
+                                <div class="col">
+                                        <h3 style="text-align:center;color: white;">Memory Test</h3>
+                                        <a href="/MemoryTest1/">
+                                        <img class="card-img-top"src="/media/listen1.png" name="images" alt="Card image" style="height: 300px;width:100%;border-radius:50% ;"></a>
+                                </div>
+                                <div class="col">
+                                        <h3 style="text-align:center;color: white;">Scenarios Test</h3>
+                                        <a href="/ScenariosTest/">
+                                         <img class="card-img-top"src="/media/scen.jpg" name="images" alt="Card image" style="height: 300px;width:100%;padding-right:15px ;border-radius:50% ; "></a>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+
+{% endblock %}

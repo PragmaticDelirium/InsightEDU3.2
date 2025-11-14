@@ -1,0 +1,277 @@
+{% extends 'base.html'%}
+{% block content%}
+{% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+<div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:1200px; width: 100%;">
+	<br>
+	<div class="container" style="width:50%;background-color:white;border-radius: 5%;">
+		<br>
+		<h3 style="text-align: center;">Add Training Data</h3>
+		<br>
+		<form action="/TrainingData/" method="POST">
+			{%csrf_token%}
+        <div class="row">
+        	<div class="col-md-12">
+        		<div class="row">
+        			<div class="col-md-4">
+        				<label>Difficulty in Reading</label>
+        			</div>
+        			<div class="col-md-8">
+        				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_Reading" name="D_Reading" value="1">&nbsp;
+        				<label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="D_Reading" name="D_Reading" value="0">&nbsp;
+                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Spelling</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_Spelling" name="D_Spelling" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_Spelling" name="D_Spelling" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Handwriting</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_Handwriting" name="D_Handwriting" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_Handwriting" name="D_Handwriting" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Written Expression</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_WrittenExpression" name="D_WrittenExpression" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_WrittenExpression" name="D_WrittenExpression" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Basic Arithmetic skills</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_BasicArithmetic" name="D_BasicArithmetic" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_BasicArithmetic" name="D_BasicArithmetic" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Higher Arithmetic skills</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_HigherArithmetic" name="D_HigherArithmetic" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_HigherArithmetic" name="D_HigherArithmetic" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Attention</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_Attention" name="D_Attention" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_Attention" name="D_Attention" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Easily Distracted</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="Easily_Distracted" name="Easily_Distracted" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="Easily_Distracted" name="Easily_Distracted" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Memory</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_Memory" name="D_Memory" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_Memory" name="D_Memory" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Lack of Motivation</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="Lack_Motivation" name="Lack_Motivation" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="Lack_Motivation" name="Lack_Motivation" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty with Study Skills</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_StudySkills" name="D_StudySkills" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_StudySkills" name="D_StudySkills" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Does Not like School</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="Does_Not_like_School" name="Does_Not_like_School" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="Does_Not_like_School" name="Does_Not_like_School" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty Learning a Language</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_LearningLanguage" name="D_LearningLanguage" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_LearningLanguage" name="D_LearningLanguage" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Difficulty Learning a Subject</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="D_LearningSubject" name="D_LearningSubject" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="D_LearningSubject" name="D_LearningSubject" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Slow To Learn</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="Slow_To_Learn" name="Slow_To_Learn" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="Slow_To_Learn" name="Slow_To_Learn" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Repeated a Grade</label>
+                                </div>
+                                <div class="col-md-8">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="Repeated_a_Grade" name="Repeated_a_Grade" value="1">&nbsp;
+                                        <label for="Smoke1"  style="color: black">YES</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" id="Repeated_a_Grade" name="Repeated_a_Grade" value="0">&nbsp;
+                                        <label for="Smoke2"  style="color: black">NO</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <div class="col-md-4">
+                                        <label>Result</label>
+                                </div>
+                                <div class="col-md-8">
+                                	<select  class="form-control" name="Result" id="Result" >
+                                		<option value="SELECT">SELECT</option>
+                                		<option value="Learning Disability">Learning Disability</option>
+                                		<option value="No Learning Disability">No Learning Disability</option>
+                                		
+                                	</select>
+                                </div>
+                            </div>
+
+                        <br>
+                        <center>
+                        <input type="submit" class="btn btn-outline-primary">
+                        </center>
+                        <br>
+                </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+    
+</div>
+
+{% endblock %}

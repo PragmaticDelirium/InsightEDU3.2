@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:750px; width: 100%;">
+        <br>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 style="text-align:center">TEST 1</h2>
+                    <video width="100%" height="440" controls>
+                        <source src="/media/carrot.mp4" type="video/mp4">
+                          
+                            Your browser does not support the video tag.
+                        </video>
+                        <center>
+                        <a href="/videotest1/" class="btn btn-outline-light">Give test here!</a>
+                    </center>
+
+                </div>
+                <div class="col-md-4">
+                    <h2 style="text-align:center">TEST 2</h2>
+                    <video width="100%" height="440" controls>
+                        <source src="/media/office.mp4" type="video/mp4">
+                          
+                            Your browser does not support the video tag.
+                        </video>
+                        <center>
+                        <a href="/videotest2/" class="btn btn-outline-light">Give test here!</a>
+                    </center>
+                </div>
+                <div class="col-md-4">
+                    <h2 style="text-align:center">TEST 3</h2>
+                    <video width="100%" height="440" controls>
+                        <source src="/media/time.mp4" type="video/mp4">
+                          
+                            Your browser does not support the video tag.
+                        </video>
+                        <center>
+                        <a href="/videotest3/" class="btn btn-outline-light">Give test here!</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+
+     <div class="row">
+ 
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/ScenariosTest/" class="btn btn-light" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+<div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:750px; width: 100%;">
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+	<h5 class="card-title" style="text-align:center;color:black;"><b>User Login</b></h5>
+    <div class="col-md-12">
+        <div class="container" style="width:50%">
+            <div class="card" style = "background-color:transparent;">
+                <div class="card-body">
+                    
+                    <br>
+                    <form class="form-signin" action="/UserLogin/" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="Enter first name" name="U_name">
+                                    <label for="floatingInput" style="color:black;">Username:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row"> 
+                            <div class="col-md-6 offset-md-3">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Enter last name" name="U_pwds">
+                                    <label for="floatingPassword" style="color:black;">Password</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                            <a href="/UserRegisteration/"><label class="badge rounded-pill bg-dark" for="customCheck1" >New User/Register</label><
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <center><input type="submit" class="btn btn-dark" value="Log In"></center>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

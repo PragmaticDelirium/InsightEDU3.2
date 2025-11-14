@@ -1,0 +1,135 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/.jpg'); background-repeat:no-repeat;background-size:cover;  height:850px; width: 100%;">
+     <style type="text/css">
+        table {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+            table td, table th {
+                border: 1px solid black;
+            }
+
+            table .FirstColumn {
+                background-color: pink;
+            }
+
+            table thead tr {
+                background-color: blue;
+            }
+
+            table tbody.secondHeader tr {
+                background-color:  #9999dd;
+            }
+    </style>
+    <div style="background: url('/media/.pg'); background-repeat:no-repeat;background-size:cover;  height:850px; width: 100%;">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<!--
+<div class="col-md-12" style="padding-left: 350px;">
+    <div class="row">
+    <div class="col-md-2">
+        <a href="/MathsLinks/" class="btn btn-primary stretched-link">Maths Test Links</a>
+    </div>
+    <div class="col-md-2">
+        <a href="/GrammarLinks/" class="btn btn-danger stretched-link">Grammar Test Links</a>
+    </div>
+    <div class="col-md-2">
+        <a href="/ReadingLinks/" class="btn btn-secondary stretched-link">Reading Test Links</a>
+    </div>
+    <div class="col-md-2">
+        <a href="/MemoryLinks/" class="btn btn-success stretched-link">Memory Test Links</a>
+    </div>
+    <div class="col-md-2">
+        <a href="/ScenariosLink/" class="btn btn-info stretched-link">Scenario Test Links</a>
+    </div>
+</div>
+</div>-->
+<h3 style="color:black;text-align: center;">Results</h3>
+<body>
+    <table class="table table-hover" >
+        <col>
+        <col>
+        <col>
+        <colgroup span="4"></colgroup>
+        <col>
+        <tbody class="FirstColumn">
+        <tr style="color:black;font-weight: bold;">
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">Learning Disability Status</th>
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">Maths Test</th>
+            <!--<th rowspan="2" style="vertical-align : middle;text-align:center;color: brown;">Dyscalculia</th>-->
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">Grammar Test</th>
+            <th colspan="3" style="horizontal-align : middle;text-align:center; width: 50%;">Scenarios Test</th>
+            
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">Reading Test</th>
+            <th colspan="2" style="horizontal-align : middle;text-align:center; width: 50%;">Memory Test</th>
+            
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">Date</th>
+            
+          <!--  <th rowspan="2" style="vertical-align : middle;text-align:center;">FILES ATTACHED</th>
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">OTHER INFO</th>
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">CGPA</th>
+            <th rowspan="2" style="vertical-align : middle;text-align:center;">STREAM</th>-->
+        </tr>
+        <tr>
+            <th scope="col">Video 1</th>
+            <th scope="col">Video 2</th>
+            <th scope="col">Video 3</th>
+            <th scope="col">Image Based</th>
+            <th scope="col">Audio Based</th>
+            
+        </tr>
+    </tbody>
+        {%for i in details%}
+        <tbody class="secondHeader">
+            <tr style="color: blue;text-align: center;">
+                <td>{{i.Learning_Disability}}</td>
+               
+                <td>{{i.Maths_Test}}</td>
+                 
+                <td>{{i.Grammar_Test}}</td>
+                <td>{{i.Video_test1}}</td>
+                <td>{{i.Video_test2}}</td>
+                <td>{{i.Video_test3}}</td>
+                
+                <td>{{i.Reading_Test}}</td>
+                <td>{{i.Memory_images}}</td>
+                <td>{{i.Memory_audio}}</td>
+                
+                 <td>{{i.Date}}</td>
+                
+
+               <!-- <td><a href="{{i.File.url}}" value = "{{i.File.url}}" >{{i.File}}</a></td>
+                
+                <td>{{i.Additional_Information}}</td>
+                <td>{{i.CGPA}}</td>
+
+                <td>{{i.CSl}},{{i.IS}},{{i.ECE}},{{i.EEE}},{{i.MECH}},{{i.IP}},{{i.OTHERS}}</td>-->
+                </tr>
+        </tbody>
+        {%endfor%}
+                        
+        
+    </table>
+</body>
+
+   
+
+    </div>
+        {%endblock%}

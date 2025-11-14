@@ -1,0 +1,105 @@
+{% extends 'base.html'%}
+    {% block content%}
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+    <div style="background: url('/media/bg2.jpg'); background-repeat:no-repeat;background-size:cover;  height:750px; width: 100%;">
+        <br>
+        <h2 style="text-align:center;">Play the audio once and write</h2>
+        <br>
+        <div class="container" style="width:50%;">
+            <form action="/MemoryTest/" method="POST" >
+                {%csrf_token%}
+            <div class="row">
+                <br>
+                <center>
+                    <audio controls>
+                        <source src="horse.ogg" type="audio/ogg">
+                            <source src="/media/welcome1.mp3" type="audio/mpeg">
+                    </audio>
+                </center>
+            </div>
+            <br>
+            <div class="row">
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 1" name="sent1">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 2" name="sent2">
+                        </div>
+                        
+                        
+                    </div>
+                    <br>
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 3" aria-label="default input example" name="sent3">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 4" name="sent4">
+                        </div>
+
+                        
+                       
+                         
+                    </div>
+                    <br>
+                     <div class="row align-items-start">
+                       
+                       <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 5" name="sent5">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 6" name="sent6">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-start">
+                         <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 7" name="sent7">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 8" name="sent8">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-start">
+                       <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 9" name="sent9">
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Word 10" name="sent10">
+                        </div>
+                        
+                    </div>
+                    <br>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <center><input type="submit" class="btn btn-dark"></center>
+            </div>
+
+        </form>
+
+        </div>
+        <br>
+        <br>
+        <div class="row">
+ 
+    <div class="col-md-12">
+        <div class="col-md-1">
+<a href="/MemoryTest1/" class="btn btn-light" style="color:black;font-size:40px">Back</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+            
+
+{% endblock %}
