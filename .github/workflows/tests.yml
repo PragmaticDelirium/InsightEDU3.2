@@ -1,0 +1,164 @@
+name: Django CI/CD Testing Pipeline
+
+on:
+  push:
+    branches: [ main, develop, claude/* ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.8, 3.9, '3.10']
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_classification_db
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          python3-dev \
+          libmysqlclient-dev \
+          build-essential \
+          pkg-config \
+          portaudio19-dev \
+          ffmpeg \
+          libsm6 \
+          libxext6 \
+          libxrender-dev \
+          libgomp1
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r requirement.txt
+        pip install pytest-django pytest-cov pytest-xdist coverage
+
+    - name: Set up environment variables
+      run: |
+        echo "DJANGO_SETTINGS_MODULE=ClassificationOfLD.settings" >> $GITHUB_ENV
+        echo "DATABASE_HOST=127.0.0.1" >> $GITHUB_ENV
+        echo "DATABASE_PORT=3306" >> $GITHUB_ENV
+
+    - name: Run migrations
+      run: |
+        python manage.py migrate --noinput
+
+    - name: Run linting (optional)
+      continue-on-error: true
+      run: |
+        pip install flake8
+        flake8 AppClassificationOfLD --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 AppClassificationOfLD --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run unit tests
+      run: |
+        pytest tests/unit/ -v --tb=short --cov=AppClassificationOfLD --cov-report=xml --cov-report=term-missing
+
+    - name: Run integration tests
+      run: |
+        pytest tests/integration/ -v --tb=short --cov=AppClassificationOfLD --cov-append --cov-report=xml --cov-report=term-missing
+
+    - name: Run all tests with coverage
+      run: |
+        pytest --cov=AppClassificationOfLD --cov=ClassificationOfLD --cov-report=xml --cov-report=html --cov-report=term-missing
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+    - name: Upload coverage reports as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report-${{ matrix.python-version }}
+        path: htmlcov/
+
+    - name: Display coverage summary
+      run: |
+        coverage report
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+
+    - name: Run safety check
+      continue-on-error: true
+      run: |
+        safety check --file=requirement.txt
+
+    - name: Run bandit security scan
+      continue-on-error: true
+      run: |
+        bandit -r AppClassificationOfLD/ -f json -o bandit-report.json
+
+    - name: Upload security report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: bandit-report.json
+
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint black isort
+
+    - name: Check code formatting with Black
+      continue-on-error: true
+      run: |
+        black --check AppClassificationOfLD/
+
+    - name: Check imports with isort
+      continue-on-error: true
+      run: |
+        isort --check-only AppClassificationOfLD/
+
+    - name: Run pylint
+      continue-on-error: true
+      run: |
+        pylint AppClassificationOfLD/ --exit-zero

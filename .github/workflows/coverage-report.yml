@@ -1,0 +1,52 @@
+name: Coverage Report
+
+on:
+  push:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libmysqlclient-dev python3-dev build-essential
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirement.txt
+        pip install pytest pytest-django pytest-cov coverage
+
+    - name: Generate coverage report
+      run: |
+        pytest --cov=AppClassificationOfLD --cov=ClassificationOfLD --cov-report=xml --cov-report=html --cov-report=term-missing
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: fulltest
+        name: codecov-umbrella
+
+    - name: Archive coverage HTML report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-html-report
+        path: htmlcov/
+        retention-days: 30
+
+    - name: Check coverage threshold
+      run: |
+        coverage report --fail-under=50
