@@ -1,0 +1,178 @@
+name: Tests and Code Quality
+
+on:
+  push:
+    branches: [ main, develop, master ]
+  pull_request:
+    branches: [ main, develop, master ]
+  schedule:
+    # Run tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+        django-version: ['4.1.7']
+        exclude:
+          # Exclude some combinations to speed up CI
+          - os: windows-latest
+            python-version: '3.8'
+          - os: windows-latest
+            python-version: '3.11'
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: Classification_db
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache pip packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirement.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install system dependencies (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mysql-client libmysqlclient-dev
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirement.txt
+        pip install -r requirements-dev.txt
+
+    - name: Set up Django settings
+      run: |
+        echo "DJANGO_SETTINGS_MODULE=ClassificationOfLD.settings" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Run migrations
+      env:
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_NAME: Classification_db
+        DB_USER: testuser
+        DB_PASSWORD: testpass
+      run: |
+        python manage.py migrate --noinput
+
+    - name: Run tests with coverage
+      env:
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_NAME: Classification_db
+        DB_USER: testuser
+        DB_PASSWORD: testpass
+        SECRET_KEY: test-secret-key-for-ci
+        DEBUG: 'False'
+      run: |
+        pytest --cov=AppClassificationOfLD --cov=ClassificationOfLD --cov-report=xml --cov-report=html --cov-report=term-missing -v
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+    - name: Upload coverage HTML report
+      uses: actions/upload-artifact@v3
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'
+      with:
+        name: coverage-report
+        path: htmlcov/
+        retention-days: 30
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install linting dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+
+    - name: Run Black
+      run: |
+        black --check --diff .
+
+    - name: Run isort
+      run: |
+        isort --check-only --diff .
+
+    - name: Run Flake8
+      run: |
+        flake8 . --count --statistics
+
+    - name: Run Pylint
+      run: |
+        pylint AppClassificationOfLD/ ClassificationOfLD/ --exit-zero || true
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+
+    - name: Run Safety check
+      run: |
+        safety check --file requirement.txt || true
+
+    - name: Run Bandit security scan
+      run: |
+        bandit -r AppClassificationOfLD/ -f json -o bandit-report.json || true
+
+    - name: Upload security report
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-report
+        path: bandit-report.json
+        retention-days: 30
+

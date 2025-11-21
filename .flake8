@@ -1,0 +1,47 @@
+[flake8]
+# Maximum line length
+max-line-length = 100
+
+# Exclude directories
+exclude =
+    .git,
+    __pycache__,
+    env,
+    classification_env,
+    venv,
+    .venv,
+    migrations,
+    manage.py,
+    assets,
+    media,
+    *.pyc,
+    .eggs,
+    *.egg-info,
+    dist,
+    build
+
+# Ignore specific errors
+# E501: line too long (handled by black)
+# E203: whitespace before ':' (conflicts with black)
+# W503: line break before binary operator (conflicts with black)
+ignore =
+    E501,
+    E203,
+    W503,
+    E402,  # module level import not at top of file
+    F401,  # imported but unused (can be noisy during development)
+
+# Per-file ignores
+per-file-ignores =
+    __init__.py:F401
+    migrations/*:E501
+
+# Maximum complexity
+max-complexity = 15
+
+# Show source code for each error
+show-source = True
+
+# Count errors and warnings
+statistics = True
+

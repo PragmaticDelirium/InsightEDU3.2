@@ -1,0 +1,129 @@
+# GitLab CI/CD Configuration for InsightEDU3.2
+
+stages:
+  - test
+  - lint
+  - security
+  - coverage
+
+variables:
+  PYTHON_VERSION: "3.10"
+  MYSQL_DATABASE: "Classification_db"
+  MYSQL_ROOT_PASSWORD: "root"
+  MYSQL_USER: "testuser"
+  MYSQL_PASSWORD: "testpass"
+
+services:
+  - mysql:8.0
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq mysql-client libmysqlclient-dev
+  - python --version
+  - pip install --upgrade pip
+  - pip install -r requirement.txt
+  - pip install -r requirements-dev.txt
+
+test:unit:
+  stage: test
+  script:
+    - python manage.py migrate --noinput
+    - pytest -m unit --cov=AppClassificationOfLD --cov-report=xml --cov-report=term-missing -v
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    reports:
+      junit: pytest-report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - htmlcov/
+    expire_in: 30 days
+
+test:integration:
+  stage: test
+  script:
+    - python manage.py migrate --noinput
+    - pytest -m integration --cov=AppClassificationOfLD --cov-report=xml --cov-report=term-missing -v
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    reports:
+      junit: pytest-report.xml
+    paths:
+      - htmlcov/
+    expire_in: 30 days
+
+test:all:
+  stage: test
+  script:
+    - python manage.py migrate --noinput
+    - pytest --cov=AppClassificationOfLD --cov=ClassificationOfLD --cov-report=xml --cov-report=html --cov-report=term-missing -v
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    reports:
+      junit: pytest-report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - htmlcov/
+    expire_in: 30 days
+  only:
+    - main
+    - develop
+    - master
+
+lint:black:
+  stage: lint
+  script:
+    - black --check --diff .
+  allow_failure: true
+
+lint:isort:
+  stage: lint
+  script:
+    - isort --check-only --diff .
+  allow_failure: true
+
+lint:flake8:
+  stage: lint
+  script:
+    - flake8 . --count --statistics
+  allow_failure: true
+
+lint:pylint:
+  stage: lint
+  script:
+    - pylint AppClassificationOfLD/ ClassificationOfLD/ --exit-zero
+  allow_failure: true
+
+security:bandit:
+  stage: security
+  script:
+    - pip install bandit safety
+    - bandit -r AppClassificationOfLD/ -f json -o bandit-report.json
+    - safety check --file requirement.txt
+  artifacts:
+    paths:
+      - bandit-report.json
+    expire_in: 30 days
+  allow_failure: true
+
+coverage:report:
+  stage: coverage
+  script:
+    - python manage.py migrate --noinput
+    - pytest --cov=AppClassificationOfLD --cov=ClassificationOfLD --cov-report=html --cov-report=xml -v
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - htmlcov/
+    expire_in: 30 days
+  only:
+    - main
+    - develop
+    - master
+

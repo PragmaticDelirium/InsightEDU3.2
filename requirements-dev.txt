@@ -1,0 +1,27 @@
+# Development and Code Quality Tools
+
+# Code Formatting
+black==23.12.1
+isort==5.13.2
+
+# Linting
+flake8==7.0.0
+flake8-docstrings==1.7.0
+pylint==3.0.3
+pylint-django==2.5.3
+pylint-plugin-utils==0.7
+
+# Type Checking
+mypy==1.8.0
+django-stubs==4.2.7
+types-requests==2.31.0.20240106
+
+# Pre-commit hooks
+pre-commit==3.6.0
+
+# Testing (optional but recommended)
+pytest==7.4.4
+pytest-django==4.8.0
+pytest-cov==4.1.0
+
+

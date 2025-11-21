@@ -1,0 +1,41 @@
+[run]
+source = AppClassificationOfLD,ClassificationOfLD
+omit =
+    */migrations/*
+    */tests/*
+    */test_*.py
+    */__pycache__/*
+    */venv/*
+    */env/*
+    */classification_env/*
+    */site-packages/*
+    manage.py
+    */settings.py
+    */wsgi.py
+    */asgi.py
+    */conftest.py
+branch = True
+parallel = True
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    @abstractmethod
+    class .*\bProtocol\):
+    @(abc\.)?abstractmethod
+
+precision = 2
+show_missing = True
+skip_covered = False
+
+[html]
+directory = htmlcov
+
+[xml]
+output = coverage.xml
+
