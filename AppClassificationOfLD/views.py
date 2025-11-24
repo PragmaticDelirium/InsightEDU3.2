@@ -252,18 +252,8 @@ def TestDisability(request):
         return JsonResponse(data)'''
         return redirect('/')
     else:
-        User_id = request.session['UserId']
-        date_joined = datetime.now()
-        print(date_joined)
-        date_joined = str(date_joined).split(' ')
-        print(date_joined[0])
-        if TestResult.objects.all().filter(Users_id = User_id,Date = date_joined[0]).exists():
-            messages.info(request,'You have already given the test for today try tommorow')
-            return render(request,'home.html',{})
-        else:
-            print('else')
-            return render(request,'TestDisability.html',{})
-        return render(request,'home.html',{})
+        # Daily restriction removed - users can now take the test multiple times per day
+        return render(request,'TestDisability.html',{})
 
 def MathsTest(request):
     if request.method == 'POST':
